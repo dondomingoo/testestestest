@@ -1,0 +1,41 @@
+﻿@page "/orders"
+@rendermode InteractiveWebAssembly
+@inject HttpClient Http
+
+
+
+<h3>Orders</h3>
+
+@if (orders == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var order in orders)
+        {
+            <li>@order.CustomerName - @order.OrderDate</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Order>? orders;
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"Bruger HttpClient med base URL: {Http.BaseAddress}");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            orders = await Http.GetFromJsonAsync<List<Order>>("api/orders");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Fejl ved hentning af ordrer: {ex.Message}");
+        }
+    }
+
+}

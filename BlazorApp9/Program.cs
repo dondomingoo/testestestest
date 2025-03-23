@@ -9,9 +9,24 @@ namespace BlazorApp9
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddHttpClient();
+
+            // Tilføj CORS-policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy => policy.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader());
+            });
+
+           
+
             // Add services to the container.
             builder.Services.AddRazorComponents()
-                .AddInteractiveWebAssemblyComponents();
+                .AddInteractiveWebAssemblyComponents()
+                .AddInteractiveServerComponents();
+            builder.Services.AddControllers(); //tilføjet for at kunne bruge API
 
             var app = builder.Build();
 
@@ -27,9 +42,14 @@ namespace BlazorApp9
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // Brug CORS-policy
+            app.UseCors("AllowAll"); //cors policy tilføjet for at kunne bruge API
+            app.UseAuthorization(); //--
+            app.MapControllers();  //--
 
-            app.UseStaticFiles();
+            app.UseHttpsRedirection(); 
+
+            app.UseStaticFiles(); 
             app.UseAntiforgery();
 
             app.MapRazorComponents<App>()
