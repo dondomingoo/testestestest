@@ -54,6 +54,7 @@ namespace BlazorApp9
 
             app.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
+                .AddInteractiveServerRenderMode()
                 .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
             app.Run();
