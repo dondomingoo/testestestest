@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorApp.Shared\BlazorApp9.Shared.csproj" />
     <ProjectReference Include="..\BlazorApp9.Client\BlazorApp9.Client.csproj" />
+    <ProjectReference Include="..\BlazorApp9.Shared\BlazorApp9.Shared.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.12" />
   </ItemGroup>
 
