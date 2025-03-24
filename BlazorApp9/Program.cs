@@ -12,13 +12,13 @@ namespace BlazorApp9
             builder.Services.AddHttpClient();
 
             // Tilføj CORS-policy
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll",
-                    policy => policy.AllowAnyOrigin()
-                                    .AllowAnyMethod()
-                                    .AllowAnyHeader());
-            });
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        policy => policy.AllowAnyOrigin()
+            //                        .AllowAnyMethod()
+            //                        .AllowAnyHeader());
+            //});
 
            
 
@@ -43,7 +43,7 @@ namespace BlazorApp9
             }
 
             // Brug CORS-policy
-            app.UseCors("AllowAll"); //cors policy tilføjet for at kunne bruge API
+            //app.UseCors("AllowAll"); //cors policy tilføjet for at kunne bruge API
             app.UseAuthorization(); //--
             app.MapControllers();  //--
 
